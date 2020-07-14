@@ -7,6 +7,7 @@ const CountryStyled = styled.div`
   border-radius: 5px;
   overflow: hidden;
   background: white;
+  margin-bottom: 40px;
 
   .details{
     text-align: left;
