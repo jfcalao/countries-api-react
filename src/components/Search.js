@@ -8,7 +8,7 @@ const SearchStyled= styled.div`
 `
 
 const Search= ()=>{
-
+  
   return(
     <SearchStyled>
       <Input/>

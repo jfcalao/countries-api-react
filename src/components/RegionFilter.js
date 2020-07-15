@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import {connect} from 'react-redux'
+import {countryFilter} from '../actions'
 
 const RegionFilterStyled = styled.div`
     width: 65%;
@@ -22,7 +24,7 @@ const RegionSelectorStyled = styled.div`
 `
 
 const RegionListStyled = styled.ul`
-  display: ${({open}) => open ? 'block' : 'none'};
+  display: ${({ open }) => open ? 'block' : 'none'};
   text-align: left;
   margin-top: .5em;
   right: 0;
@@ -39,30 +41,56 @@ const RegionListStyled = styled.ul`
     font-size: .9em;
   }
 `
-const RegionFilter = () => {
+const RegionFilter = (props) => {
   const [open, setOpen] = React.useState(false)
+  const [filterBy, setFilterBy] = React.useState('Filter by Region')
 
-  const showRegionList= () => {
+  const showRegionList = () => {
     setOpen(!open)
+  }
+
+  const handlerClickedRegion = region => {
+    setOpen(false)
+    setFilterBy(region)
+    if(region==='Filter by Region'){
+       props.countryFilter([])
+    }else{
+      console.log(props.countryFilterVector.length)
+        const matchedCountries=props.countries.filter(item=>item.region===region)
+        props.countryFilter(matchedCountries)
+        
+      
+
+    }
+
   }
   return (
     <RegionFilterStyled >
       <RegionSelectorStyled onClick={showRegionList}>
         <p>
-          Filter by Region
+          {filterBy}
         </p>
         <i className="fas fa-chevron-down"></i>
 
       </RegionSelectorStyled>
 
       <RegionListStyled open={open}>
-        <li>Africa</li>
-        <li>America</li>
-        <li>Asia</li>
-        <li>Europe</li>
-        <li>Oceania</li>
+        <li onClick={() => handlerClickedRegion('Filter by Region')}>Todo</li>
+        <li onClick={() => handlerClickedRegion('Africa')}>Africa</li>
+        <li onClick={() => handlerClickedRegion('Americas')}>Americas</li>
+        <li onClick={() => handlerClickedRegion('Asia')}>Asia</li>
+        <li onClick={() => handlerClickedRegion('Europe')}>Europe</li>
+        <li onClick={() => handlerClickedRegion('Oceania')}>Oceania</li>
       </RegionListStyled>
     </RegionFilterStyled>
   )
 }
-export default RegionFilter
+const mapStateToProps=state=>({
+  countries: state.countries,
+  countryFilterVector: state.countryFilter
+})
+const mapDispatchToProps={
+  countryFilter
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegionFilter)

@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { countryFilter } from '../actions'
 
 const InputStyled = styled.label`
   width:100%;
@@ -23,13 +25,36 @@ const InputStyled = styled.label`
   }
 `
 
-const Input = () => {
+const Input = (props) => {
+  const handleInput = (ev) => {
+    const inputValue = ev.target.value.toLowerCase()
+    if (inputValue === "") {
+      props.countryFilter([])
+    } else {
+      const matchedCountries = props.countries.filter(
+        item => item.name.toLowerCase().includes(inputValue)
+        )
+        props.countryFilter(matchedCountries)
+      }
 
+  }
   return (
     <InputStyled>
       <i className="fas fa-search"></i>
-      <input type="text" placeholder="Search for a country..." />
+      <input
+        type="text"
+        placeholder="Search for a country..."
+        onChange={handleInput}
+      />
     </InputStyled>
   )
 }
-export default Input
+
+const mapStateToProps = (state) => ({
+  countries: state.countries,
+})
+const mapDispatchToProps = {
+  countryFilter
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Input)
