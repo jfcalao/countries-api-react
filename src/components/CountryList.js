@@ -9,6 +9,7 @@ const CountryListStyled = styled.div`
   padding: 40px;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 `
 
 const CountryList = (props) => {
