@@ -13,13 +13,16 @@ const CountryListStyled = styled.div`
 
 const CountryList = (props) => {
   const API = "https://restcountries.eu/rest/v2/all"
+  const setCountries=props.setCountries
+  
   useEffect(
     () => {
       fetch(API)
         .then(resolve => resolve.json())
-        .then(data => props.setCountries(data))
+        .then(data => setCountries(data))
         .catch(err => console.log('Error: ', err))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     , []
   )
   return (
