@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { countryFilter } from '../actions'
+import { countryFilter, setInput } from '../actions'
 
 const InputStyled = styled.label`
   width:100%;
@@ -26,18 +26,16 @@ const InputStyled = styled.label`
 `
 
 const Input = (props) => {
+  console.log(props.region)
   const handleInput = (ev) => {
     const inputValue = ev.target.value.toLowerCase()
-    if (inputValue === "") {
-      props.countryFilter([])
-    } else {
-      const matchedCountries = props.countries.filter(
-        item => item.name.toLowerCase().includes(inputValue)
-        )
-        props.countryFilter(matchedCountries)
-      }
-
+    props.setInput(inputValue)
+    const matchedCountries = props.countries.filter(item=> item.region===props.region).filter(
+      item => item.name.toLowerCase().includes(inputValue)
+    )
+    props.countryFilterAction(matchedCountries)
   }
+
   return (
     <InputStyled>
       <i className="fas fa-search"></i>
@@ -52,9 +50,14 @@ const Input = (props) => {
 
 const mapStateToProps = (state) => ({
   countries: state.countries,
+  countryFilter: state.countryFilter,
+  region: state.region,
+  input: state.input
 })
 const mapDispatchToProps = {
-  countryFilter
+  countryFilterAction: countryFilter,
+  setInput
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input)

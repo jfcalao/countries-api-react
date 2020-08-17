@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import {connect} from 'react-redux'
-import {countryFilter} from '../actions'
+import { connect } from 'react-redux'
+import { countryFilter, setRegion } from '../actions'
 
 const RegionFilterStyled = styled.div`
     width: 65%;
@@ -50,17 +50,16 @@ const RegionFilter = (props) => {
   }
 
   const handlerClickedRegion = region => {
+    props.setRegion(region)
+    console.log(props.region)
     setOpen(false)
     setFilterBy(region)
-    if(region==='Filter by Region'){
-       props.countryFilter([])
-    }else{
+    if (region === 'Filter by Region') {
+      props.countryFilter(props.countries)
+    } else {
       console.log(props.countryFilterVector.length)
-        const matchedCountries=props.countries.filter(item=>item.region===region)
-        props.countryFilter(matchedCountries)
-        
-      
-
+      const matchedCountries = props.countries.filter(item => item.region === region).filter(item => item.name.toLowerCase().includes(props.input))
+      props.countryFilter(matchedCountries)
     }
 
   }
@@ -85,12 +84,15 @@ const RegionFilter = (props) => {
     </RegionFilterStyled>
   )
 }
-const mapStateToProps=state=>({
+const mapStateToProps = state => ({
   countries: state.countries,
-  countryFilterVector: state.countryFilter
+  countryFilterVector: state.countryFilter,
+  region: state.region,
+  input: state.input
 })
-const mapDispatchToProps={
-  countryFilter
+const mapDispatchToProps = {
+  countryFilter,
+  setRegion
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegionFilter)

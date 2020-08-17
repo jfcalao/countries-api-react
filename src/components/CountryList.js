@@ -14,8 +14,8 @@ const CountryListStyled = styled.div`
 
 const CountryList = (props) => {
   const API = "https://restcountries.eu/rest/v2/all"
-  const setCountries=props.setCountries
-  
+  const setCountries = props.setCountries
+
   useEffect(
     () => {
       fetch(API)
@@ -28,39 +28,20 @@ const CountryList = (props) => {
   )
   return (
     <CountryListStyled>
-
       {
-        props.countryFilter.length === 0 ?
-          props.countries.map((item) => (
-            <Country
-              key={item.name}
-              flag={item.flag}
-              name={item.name}
-              population={item.population}
-              region={item.region}
-              capital={item.capital}
-            />
-
-          ))
-
-          :
-
-          props.countryFilter.map((item) => (
-            <Country
-              key={item.name}
-              flag={item.flag}
-              name={item.name}
-              population={item.population}
-              region={item.region}
-              capital={item.capital}
-            />
-
-          ))
-
+        props.countryFilter.map((item) => (
+          <Country
+            key={item.name}
+            flag={item.flag}
+            name={item.name}
+            population={item.population}
+            region={item.region}
+            capital={item.capital}
+          />
+        ))
       }
     </CountryListStyled>
   )
-
 }
 const mapDispatchToProps = {
   setCountries

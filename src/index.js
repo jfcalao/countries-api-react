@@ -8,7 +8,13 @@ import * as serviceWorker from './serviceWorker';
 import reducer from './reducers';
 
 
-const initialState = {countries:[], countryFilter:[]}
+const initialState = {
+  countries:[],
+  countryFilter:[],
+  region: '',
+  input: ''
+}
+
 const composeEnhancer= window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducer, initialState, composeEnhancer())
 
