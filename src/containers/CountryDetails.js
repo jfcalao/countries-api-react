@@ -1,16 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 
 
 
 const CountryDetails = () => {
+  const history = useHistory()
+  const handleClick = () => {
+    history.goBack()
+  }
   return (
     <>
       <h1>ESTÁ VIVOOOO!!!</h1>
-      <Link to="/">
-        <button>Go back</button>
-      </Link>
+      <button onClick={handleClick}>Go back</button>
     </>
   )
 }

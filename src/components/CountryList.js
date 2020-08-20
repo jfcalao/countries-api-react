@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import { setCountries } from '../actions'
 import { connect } from 'react-redux'
 import Country from './Country'
@@ -22,7 +21,6 @@ const CountryListStyled = styled.div`
 const CountryList = (props) => {
   const API = "https://restcountries.eu/rest/v2/all"
   const setCountries = props.setCountries
-
   useEffect(
     () => {
       fetch(API)
@@ -34,10 +32,9 @@ const CountryList = (props) => {
     , []
   )
   return (
-    <CountryListStyled>
+    <CountryListStyled >
       {
         props.countryFilter.map((item) => (
-          <Link to="/country">
             <Country
               key={item.name}
               flag={item.flag}
@@ -46,7 +43,6 @@ const CountryList = (props) => {
               region={item.region}
               capital={item.capital}
             />
-          </Link>
         ))
       }
     </CountryListStyled>
