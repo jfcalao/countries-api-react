@@ -11,7 +11,7 @@ import reducer from './reducers';
 const initialState = {
   countries:[],
   countryFilter:[],
-  region: '',
+  region: 'Filter by Region',
   input: ''
 }
 
