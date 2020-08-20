@@ -1,5 +1,3 @@
-import { countryFilter } from "../actions"
-
 const reducer = (state, action) => {
   switch(action.type){
     case 'SET_COUNTRIES':

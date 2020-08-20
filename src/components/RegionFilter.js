@@ -50,18 +50,18 @@ const RegionFilter = (props) => {
   }
 
   const handlerClickedRegion = region => {
+    var matchedCountries=[]
     props.setRegion(region)
     console.log(props.region)
     setOpen(false)
     setFilterBy(region)
     if (region === 'Filter by Region') {
-      props.countryFilter(props.countries)
+      matchedCountries=props.countries.filter(item => item.name.toLowerCase().includes(props.input))
     } else {
       console.log(props.countryFilterVector.length)
-      const matchedCountries = props.countries.filter(item => item.region === region).filter(item => item.name.toLowerCase().includes(props.input))
-      props.countryFilter(matchedCountries)
+      matchedCountries = props.countries.filter(item => item.region === region).filter(item => item.name.toLowerCase().includes(props.input))
     }
-
+    props.countryFilter(matchedCountries)
   }
   return (
     <RegionFilterStyled >

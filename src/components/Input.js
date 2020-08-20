@@ -30,10 +30,17 @@ const Input = (props) => {
   const handleInput = (ev) => {
     const inputValue = ev.target.value.toLowerCase()
     props.setInput(inputValue)
-    const matchedCountries = props.countries.filter(item=> item.region===props.region).filter(
-      item => item.name.toLowerCase().includes(inputValue)
-    )
-    props.countryFilterAction(matchedCountries)
+    if (props.region === 'Filter by Region') {
+      const matchedCountries = props.countries.filter(
+        item => item.name.toLowerCase().includes(inputValue)
+      )
+      props.countryFilterAction(matchedCountries)
+    } else {
+      const matchedCountries = props.countries.filter(item => item.region === props.region).filter(
+        item => item.name.toLowerCase().includes(inputValue)
+      )
+      props.countryFilterAction(matchedCountries)
+    }
   }
 
   return (
