@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { setCountries } from '../actions'
 import { connect } from 'react-redux'
 import Country from './Country'
@@ -10,6 +11,12 @@ const CountryListStyled = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  a{
+    text-decoration:none;
+    color:initial;
+    margin-bottom: 40px;
+  }
 `
 
 const CountryList = (props) => {
@@ -30,17 +37,20 @@ const CountryList = (props) => {
     <CountryListStyled>
       {
         props.countryFilter.map((item) => (
-          <Country
-            key={item.name}
-            flag={item.flag}
-            name={item.name}
-            population={item.population}
-            region={item.region}
-            capital={item.capital}
-          />
+          <Link to="/country">
+            <Country
+              key={item.name}
+              flag={item.flag}
+              name={item.name}
+              population={item.population}
+              region={item.region}
+              capital={item.capital}
+            />
+          </Link>
         ))
       }
     </CountryListStyled>
+
   )
 }
 const mapDispatchToProps = {

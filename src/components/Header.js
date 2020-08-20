@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
 
 const HeaderStyled = styled.div`
   display: flex;
@@ -14,6 +16,10 @@ const HeaderStyled = styled.div`
     margin: 0;
     align-items: center;
   }
+  a{
+    align-self:center;
+  }
+
   label{
     font-size: 14px;
     display: inherit;
@@ -32,7 +38,9 @@ const Header = () => {
 
   return (
     <HeaderStyled>
-      <h1>Were in the world?</h1>
+      <Link to="/">
+        <h1>Were in the world?</h1>
+      </Link>
       <label>
         <i className="far fa-moon"></i>
         <p>Dark mode</p>

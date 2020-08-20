@@ -7,8 +7,8 @@ const CountryStyled = styled.div`
   border-radius: 5px;
   overflow: hidden;
   background: white;
-  margin-bottom: 40px;
-
+  text-decoration: none;
+  
   .details{
     text-align: left;
     padding: 20px;
@@ -27,14 +27,16 @@ const CountryStyled = styled.div`
   h3{
     margin:0;
     padding-bottom: 20px;
+    text-decoration:none;
   }
+  
 `
 
 
 const Country = ({ flag, name, population, region, capital }) => {
-
+  
   return (
-    <CountryStyled>
+    <CountryStyled >
       <img loading="lazy" src={flag} alt="flag" />
       <div className="details">
         <h3>{name}</h3>

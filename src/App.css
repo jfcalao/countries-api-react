@@ -3,7 +3,10 @@
   background: hsl(0, 0%, 98%);
   font-family: 'Nunito Sans', sans-serif;
 }
-
+a{
+  text-decoration: none;
+  color:inherit;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
