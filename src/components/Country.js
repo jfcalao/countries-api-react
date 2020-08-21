@@ -9,6 +9,8 @@ const CountryStyled = styled.div`
   overflow: hidden;
   background: white;
   text-decoration: none;
+  margin-bottom: 40px;
+
   
   .details{
     text-align: left;
@@ -37,7 +39,7 @@ const CountryStyled = styled.div`
 const Country = ({ flag, name, population, region, capital }) => {
   const history= useHistory()
   const handleClick=()=>{
-    history.push('/country')
+    history.push(`/country/${name}`)
   }
   return (
     <CountryStyled onClick={handleClick}>

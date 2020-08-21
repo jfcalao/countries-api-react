@@ -14,7 +14,7 @@ function App() {
       <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/country" component={CountryDetails} />
+            <Route exact path="/country/:id" component={CountryDetails} />
           </Switch>
       </Layout>
       </BrowserRouter>

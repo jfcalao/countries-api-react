@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import {composeWithDevTools} from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import './index.css';
 import App from './App';
@@ -11,12 +13,13 @@ import reducer from './reducers';
 const initialState = {
   countries:[],
   countryFilter:[],
+  isLoading: false,
+  isError: false,
   region: 'Filter by Region',
   input: ''
 }
 
-const composeEnhancer= window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(reducer, initialState, composeEnhancer())
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)))
 
 
 ReactDOM.render(
