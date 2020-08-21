@@ -27,7 +27,6 @@ const MatchedCountryStyled = styled.div`
     margin-bottom: 45px;
     p{
       margin-bottom: 10px;
-      
     }
   }
   .border-countries{

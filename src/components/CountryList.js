@@ -21,7 +21,9 @@ const CountryList = (props) => {
   const {fetchCountries, isLoading, isError, countryFilter} = props
 
   useEffect(() => {
-    fetchCountries()
+    if(countryFilter.length===0){
+      fetchCountries()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

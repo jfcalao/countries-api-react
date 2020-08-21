@@ -33,12 +33,13 @@ const CountryDetails = () => {
   const { goBack } = useHistory()
   const dispatch = useDispatch()
   const country = useSelector(state => state.countries.find(item => item.name === id))
+  const { isLoading, isError } = useSelector(state => state)
   useEffect(() => {
     if (!country) {
       dispatch(fetchCountries())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [country])
+  }, [])
 
   const handleClick = () => {
     goBack()
@@ -52,20 +53,24 @@ const CountryDetails = () => {
         </button>
       </div>
       {
-        country &&
-        <MatchedCountry
-          name={country.name}
-          nativeName={country.nativeName}
-          population={country.population}
-          region={country.region}
-          subregion={country.subregion}
-          capital={country.capital}
-          topLevelDomain={country.topLevelDomain}
-          currencies={country.currencies[0].name}
-          languages={country.languages.map(item => `${item.name} `)}
-          flag={country.flag}
-          borderCountries={country.borders}
-        />
+        isLoading
+          ? <p>Loading</p>
+          : isError
+            ? <p>Error</p>
+            : country
+            &&<MatchedCountry
+              name={country.name}
+              nativeName={country.nativeName}
+              population={country.population}
+              region={country.region}
+              subregion={country.subregion}
+              capital={country.capital}
+              topLevelDomain={country.topLevelDomain}
+              currencies={country.currencies[0].name}
+              languages={country.languages.map(item => `${item.name} `)}
+              flag={country.flag}
+              borderCountries={country.borders}
+            />
       }
 
     </CountryDetailsStyled>
